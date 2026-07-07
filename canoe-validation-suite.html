@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Riyasudeen D | Embedded Software Developer</title>
+  <meta name="description" content="Premium recruiter-focused portfolio for Mohamed Riyasudeen D." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-card">
+      <img src="profile.jpeg" alt="Mohamed Riyasudeen" class="avatar">
+      <h1>Mohamed Riyasudeen D</h1>
+      <p>Embedded Software Developer</p>
+      <a class="linkedin-btn" href="https://www.linkedin.com/in/mohamed-riyasudeen-a8373b159/" target="_blank"
+        rel="noreferrer">LinkedIn</a>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="index.html#home" class="nav-link">Home</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#experience" class="nav-link">Experience</a>
+      <a href="index.html#skills" class="nav-link">Skills</a>
+      <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="section content-section">
+      <div class="section-head">
+        <span class="eyebrow"> Royal Enfield</span> <span class="eyebrow">2025 - 2026</span>
+      </div>
+
+      <article class="card">
+
+        <h2>CANoe Validation Dashboard & CAPL Automation Suite</h2>
+
+        <p>
+          Designed and developed a validation-focused CANoe environment for an EV Battery Management
+          System, combining a single-view monitoring dashboard with CAPL-based automation and fault
+          injection support. The goal was to reduce validation effort, improve visibility of BMS
+          parameters, and make test execution faster and more repeatable.
+        </p>
+
+        <h3>Overview</h3>
+        <p>
+          As BMS firmware complexity increased, manual monitoring of distributed battery parameters and
+          repeated validation flows became time-consuming and error-prone. I built a CANoe-based
+          validation suite that brought key battery measurements, states, and fault indicators into one
+          consolidated interface, while also using CAPL scripts to automate repetitive validation tasks.
+        </p>
+        <p>
+          This setup was used to support parameter monitoring, fault simulation, and faster debugging
+          during integration and validation activities. By improving observability and reducing manual
+          effort, the suite helped accelerate the validation process by around 40 percent.
+        </p>
+
+        <h3>Key Contributions</h3>
+        <ul>
+          <li>Built a single-view CANoe dashboard for real-time BMS parameter monitoring.</li>
+          <li>Developed CAPL-based automation for repeated validation and test workflows.</li>
+          <li>Created fault-injection support to verify BMS responses under abnormal conditions.</li>
+          <li>Improved debugging efficiency by consolidating battery signals, faults, and state information in one
+            place.
+          </li>
+          <li>Supported integration and validation activities using CANoe, CANalyzer, CAPL, and log analysis tools.</li>
+          <li>Helped reduce overall validation effort and improve repeatability of test execution.</li>
+        </ul>
+
+        <h3>Technical Details</h3>
+        <p>
+          The CANoe dashboard was structured to provide a compact and practical view of BMS behavior,
+          allowing important signals such as cell-related data, pack-level measurements, and fault states
+          to be monitored from one screen. This reduced context switching during debugging and made it
+          easier to correlate live behavior with expected system operation.
+        </p>
+        <p>
+          CAPL automation was used to trigger validation sequences, simulate message activity, and inject
+          fault conditions needed for software verification. This improved consistency across repeated
+          tests and helped uncover issues faster than purely manual validation methods.
+        </p>
+
+        <h3>Engineering Challenges</h3>
+        <ul>
+          <li>Consolidating many BMS parameters into a dashboard that remained readable and useful during live testing.
+          </li>
+          <li>Making CAPL automation flexible enough to support both routine checks and fault-oriented validation.</li>
+          <li>Ensuring fault injection scenarios matched practical validation needs without adding unnecessary
+            complexity.
+          </li>
+          <li>Bridging the gap between raw CAN traffic, engineering interpretation, and firmware-debug requirements.
+          </li>
+        </ul>
+
+        <h3>Stack</h3>
+        <p>
+          Vector CANoe, CANalyzer, CAPL scripting, CAPL DLL concepts, CAN communication, BMS signal
+          monitoring, fault injection, log analysis, embedded firmware validation.
+        </p>
+
+        <h3>Impact</h3>
+        <ul>
+          <li>Accelerated validation activities by approximately 40 percent.</li>
+          <li>Improved observability through a single-view dashboard for BMS parameters and fault status.</li>
+          <li>Reduced manual effort in repetitive validation flows using CAPL automation.</li>
+          <li>Strengthened debug and verification coverage during BMS integration activities.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        document.body.classList.toggle('menu-open');
+      });
+    }
+  </script>
+</body>
+
+</html>

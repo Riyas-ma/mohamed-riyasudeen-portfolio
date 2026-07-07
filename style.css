@@ -1,0 +1,879 @@
+:root {
+  --bg: #05070d;
+  --bg2: #0a1020;
+  --panel: #0c1426;
+  --panel2: #111b31;
+  --line: rgba(255, 255, 255, .08);
+  --text: #eef4ff;
+  --muted: #99a8c4;
+  --accent: #49b2ff;
+  --accent2: #7df0d1;
+  --radius: 24px;
+  --sidebar: 300px;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top left, rgba(73, 178, 255, .18), transparent 24%), linear-gradient(180deg, #04060b, #09101e)
+}
+
+a {
+  text-decoration: none;
+  color: inherit
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar);
+  padding: 24px;
+  background: linear-gradient(180deg, #040811, #08101f);
+  border-right: 1px solid var(--line);
+  z-index: 20
+}
+
+.profile-card {
+  padding: 10px 6px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--line)
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  font: 800 38px Outfit, sans-serif;
+  background: linear-gradient(135deg, #0e3d6f, #1f7bd3 60%, #6edcff);
+  box-shadow: 0 20px 50px rgba(31, 123, 211, .35)
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 18px;
+  box-shadow: 0 20px 50px rgba(31, 123, 211, .28);
+  border: 2px solid rgba(255, 255, 255, .08);
+}
+
+.profile-card h1 {
+  margin: 0;
+  font: 800 28px Outfit, sans-serif
+}
+
+.profile-card p {
+  margin: 10px 0 16px;
+  color: var(--muted)
+}
+
+.linkedin-btn {
+  display: inline-flex;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(73, 178, 255, .14);
+  border: 1px solid rgba(73, 178, 255, .28)
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 22px
+}
+
+.nav-link {
+  padding: 14px 16px;
+  border-radius: 14px;
+  color: #d7e4ff;
+  transition: .25s
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(255, 255, 255, .05);
+  transform: translateX(4px)
+}
+
+.main {
+  margin-left: var(--sidebar);
+  padding: 24px
+}
+
+.section,
+.project-view {
+  max-width: 1120px;
+  margin: 0 auto 16px
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 0.8fr;
+  gap: 14px;
+  height: calc(100vh - 56px);
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+.hero-copy {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-panel,
+.content-section,
+.project-view,
+.card,
+.timeline-card,
+.skill-card,
+.feature-card {
+  background: linear-gradient(180deg, rgba(12, 20, 38, .9), rgba(10, 17, 31, .82));
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .35)
+}
+
+.hero-panel,
+.content-section,
+.project-view {
+  border-radius: 28px
+}
+
+.hero-side {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Label CURRENT FOCUS & CORE STACK */
+.card-label {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  color: var(--accent2);
+  font-size: 14px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Secction Title Chip */
+.eyebrow {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  color: var(--accent2);
+  font-size: 14px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.date-pill {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  color: var(--accent2);
+  font-size: 10px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Use this for the top small label like category/tag */
+.project-tag {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  color: var(--accent2);
+  font-size: 10px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Home Page h2 */
+.hero h2 {
+  font: 800 clamp(16px, 1.4vw, 22px)/1.25 Outfit, sans-serif;
+  margin: 6px 0 8px;
+  letter-spacing: -.02em;
+}
+
+.section-head h2,
+.project-header h2 {
+  font: 800 clamp(16px, 1.4vw, 22px)/1.25 Outfit, sans-serif;
+  margin: 6px 0 8px;
+  letter-spacing: -.02em;
+}
+
+.hero h2 {
+  max-width: 100%
+}
+
+.hero p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.section-head p,
+.timeline-card li,
+.project-block p,
+.project-block li {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+.timeline-card p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.type-line {
+  margin-top: 8px;
+  font-size: 14px
+}
+
+#typedText {
+  color: var(--accent);
+  font-weight: 800;
+  border-right: 2px solid var(--accent);
+  padding-right: 6px
+}
+
+.hero-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0 10px
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px
+}
+
+
+.btn {
+  min-height: 38px;
+  padding: 0 18px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #49b2ff, #5e6fff);
+  color: #fff
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08)
+}
+
+.stat-card {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.stat-card strong {
+  display: block;
+  font: 800 18px Outfit, sans-serif;
+  margin-bottom: 3px
+}
+
+.stat-card span {
+  color: #c8d4eb;
+  font-size: 14px
+}
+
+.feature-card {
+  padding: 20px 14px;
+  border-radius: 14px;
+}
+
+/* Title inside CURRENT FOCUS & CORE STACK */
+.feature-card h3 {
+  margin: 0 0 6px;
+  font: 700 20px Outfit, sans-serif;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font: 700 24px Outfit, sans-serif;
+}
+
+.skill-card h3 {
+  margin: 0 0 10px;
+  font: 700 20px Outfit, sans-serif;
+}
+
+.timeline-card h3,
+.project-block h3 {
+  margin: 0 0 10px;
+  font: 700 18px Outfit, sans-serif;
+}
+
+/* Use this for full card behavior like hover, padding, overflow: */
+.project-card h3 {
+  margin: 0 0 10px;
+  font: 700 18px Outfit, sans-serif;
+}
+
+.project-card {
+  padding: 12px 12px;
+  border-radius: 18px;
+  display: flex;
+}
+
+/* CORE CHIPS */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px
+}
+
+.chips span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  font-size: 12px;
+}
+
+/* SKILL CHIPS */
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px
+}
+
+.skill-chips span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  font-size: 14px;
+}
+
+.stack-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  font-size: 11px;
+}
+
+.content-section {
+  padding: 24px
+}
+
+.section-head {
+  margin-bottom: 12px
+}
+
+.section-head h2 {
+  font-size: clamp(30px, 4vw, 46px)
+}
+
+.grid.two-col {
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  gap: 18px
+}
+
+.skill-card {
+  padding: 18px 18px;
+  border-radius: 18px;
+}
+
+.card,
+.timeline-card,
+.project-block {
+  padding: 16px 18px;
+  border-radius: 18px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px
+}
+
+.info-grid div {
+  padding: 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(255, 255, 255, .06)
+}
+
+.info-grid span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8ea0c2;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase
+}
+
+.info-grid strong {
+  font-size: 14px;
+}
+
+.timeline {
+  display: grid;
+  gap: 12px
+}
+
+.timeline-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+}
+
+.timeline-top>div:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.stack-pill {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .1);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.timeline-card ul,
+.project-block ul {
+  margin: 0;
+  padding-left: 18px
+}
+
+.timeline-card li,
+.project-block li {
+  margin-bottom: 5px;
+  font-size: 12.5px
+}
+
+.timeline-card li,
+.project-block li {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px
+}
+
+.project-card {
+  overflow: hidden;
+  padding: 0;
+  transition: .28s
+}
+
+.project-card:hover {
+  transform: translateY(-6px)
+}
+
+.project-cover {
+  min-height: 200px;
+  position: relative;
+  padding: 26px;
+  display: flex;
+  align-items: end;
+  background: radial-gradient(circle at top right, rgba(125, 240, 209, .12), transparent 24%), radial-gradient(circle at top left, rgba(73, 178, 255, .2), transparent 30%), linear-gradient(145deg, #0b1223, #12264a 60%, #0d1931)
+}
+
+.project-cover {
+  min-height: 240px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-cover.alt2 {
+  background: radial-gradient(circle at top right, rgba(125, 240, 209, .14), transparent 22%), linear-gradient(145deg, #0a1620, #113848 60%, #0b232f)
+}
+
+.project-cover.alt3 {
+  background: radial-gradient(circle at top right, rgba(94, 111, 255, .18), transparent 22%), linear-gradient(145deg, #120f24, #2a214b 58%, #1a1632)
+}
+
+.project-cover.alt4 {
+  background: radial-gradient(circle at top right, rgba(73, 178, 255, .16), transparent 22%), linear-gradient(145deg, #10151f, #283955 58%, #151d2e)
+}
+
+.project-cover:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .06), rgba(0, 0, 0, .7))
+}
+
+.project-content {
+  position: relative;
+  z-index: 1
+}
+
+/* Use this for the large heading inside each portfolio card: */
+.project-content h3 {
+  color: #fff;
+  font-size: 20px
+}
+
+/* Use this for the description text inside each portfolio card: */
+.project-content p {
+  color: #d9e4fb;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.project-link {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 8px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .12);
+  font-weight: 700
+}
+
+.project-link {
+  font-size: 12px;
+}
+
+.project-shell {
+  padding: 32px
+}
+
+.project-back {
+  display: inline-flex;
+  margin-bottom: 22px;
+  color: var(--accent);
+  font-weight: 700
+}
+
+.project-header {
+  display: grid;
+  grid-template-columns: 1.2fr .85fr;
+  gap: 18px;
+  margin-bottom: 18px
+}
+
+.project-intro,
+.project-meta {
+  padding: 28px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(12, 20, 38, .9), rgba(10, 17, 31, .82));
+  border: 1px solid var(--line)
+}
+
+.project-meta span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8ea0c2;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase
+}
+
+.project-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px
+}
+
+.project-block.full {
+  grid-column: 1 / -1
+}
+
+.shot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px
+}
+
+.shot {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(255, 255, 255, .06)
+}
+
+.shot-visual {
+  height: 180px;
+  border-radius: 16px;
+  background: radial-gradient(circle at top left, rgba(73, 178, 255, .24), transparent 20%), linear-gradient(135deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+  border: 1px dashed rgba(73, 178, 255, .3);
+  display: grid;
+  place-items: center;
+  color: #d8e4fb;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px
+}
+
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 40;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  background: #08101f
+}
+
+.mobile-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 5px auto;
+  background: #fff
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s ease, transform .8s ease
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0)
+}
+
+.delay-1 {
+  transition-delay: .12s
+}
+
+.delay-2 {
+  transition-delay: .22s
+}
+
+@media (max-width:1180px) {
+
+  .hero,
+  .grid.two-col,
+  .skills-grid,
+  .portfolio-grid,
+  .project-header,
+  .project-body,
+  .shot-grid,
+  .stats {
+    grid-template-columns: 1fr
+  }
+}
+
+@media (max-width:1024px) {
+  .mobile-toggle {
+    display: block
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform .28s ease
+  }
+
+  body.menu-open .sidebar {
+    transform: translateX(0)
+  }
+
+  .main {
+    margin-left: 0;
+    padding-top: 84px
+  }
+}
+
+@media (max-width:760px) {
+
+  .hero-copy,
+  .hero-side,
+  .content-section,
+  .project-view,
+  .card,
+  .timeline-card,
+  .skill-card,
+  .feature-card,
+  .project-block,
+  .project-intro,
+  .project-meta {
+    padding: 18px;
+    border-radius: 22px
+  }
+
+
+  .info-grid {
+    grid-template-columns: 1fr
+  }
+
+  .timeline-top {
+    flex-direction: column
+  }
+}
+
+/* ── Section scroll snap fix ── */
+.section {
+  scroll-margin-top: 24px;
+}
+
+/* Make each content-section take at least full viewport height */
+.content-section {
+  min-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── One-section-at-a-time view fix ── */
+.content-section {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-margin-top: 0px;
+}
+
+.section {
+  scroll-margin-top: 0px;
+}
+
+html {
+  scroll-snap-type: y proximity;
+}
+
+.content-section,
+.hero.section {
+  scroll-snap-align: start;
+}
+
+.card h4 {
+  font-size: 16px;
+}
+
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+#home {
+  scroll-margin-top: 40px;
+}
+
+#about {
+  scroll-margin-top: 30px;
+}
+
+#experience {
+  scroll-margin-top: 20px;
+}
+
+#skills,
+#portfolio {
+  scroll-margin-top: 30px;
+}
+
+/* Project Case-Study Style Sheets */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 24px;
+}
+
+th,
+td {
+  border: 1px solid rgba(255, 255, 255, .12);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: rgba(255, 255, 255, .05);
+  color: var(--text);
+}
+
+.video-embed {
+  margin-top: 16px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 360px;
+}
+
+.case-image {
+  width: 100%;
+  border-radius: 16px;
+  margin: 16px 0;
+  border: 1px solid rgba(255, 255, 255, .08);
+}

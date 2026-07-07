@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Riyasudeen D | Embedded Software Developer</title>
+  <meta name="description" content="Premium recruiter-focused portfolio for Mohamed Riyasudeen D." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-card">
+      <img src="profile.jpeg" alt="Mohamed Riyasudeen" class="avatar">
+      <h1>Mohamed Riyasudeen D</h1>
+      <p>Embedded Software Developer</p>
+      <a class="linkedin-btn" href="https://www.linkedin.com/in/mohamed-riyasudeen-a8373b159/" target="_blank"
+        rel="noreferrer">LinkedIn</a>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="index.html#home" class="nav-link">Home</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#experience" class="nav-link">Experience</a>
+      <a href="index.html#skills" class="nav-link">Skills</a>
+      <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="section content-section">
+      <div class="section-head">
+        <span class="eyebrow"> Royal Enfield</span> <span class="eyebrow">2025 - 2026</span>
+      </div>
+
+      <article class="card">
+
+        <h2>Passive Cell Balancing & Low-Power Monitoring</h2>
+        <p>
+          Developed production-oriented balancing and low-power monitoring firmware for an EV Battery
+          Management System built on the NXP S32K322. The work focused on improving cell voltage
+          uniformity during charge and sleep conditions while keeping critical battery measurements
+          active in reduced-power states.
+        </p>
+
+        <h3>Overview</h3>
+        <p>
+          This project addressed two tightly coupled BMS requirements: maintaining cell balance and
+          preserving battery visibility during low-power operation. I implemented passive balancing
+          logic using threshold-based decision making and PWM-controlled bleed operation, then supported
+          low-power monitoring using FS26-based power management and low-power cell monitoring features
+          from the battery monitoring ICs.
+        </p>
+        <p>
+          The result was a practical embedded solution that improved pack balancing performance without
+          excessive thermal stress and enabled continued battery supervision during standby conditions.
+          This work was part of a production-focused automotive BMS program with strong emphasis on
+          reliability, diagnostics, and safe state transitions.
+        </p>
+
+        <h3>Key Contributions</h3>
+        <ul>
+          <li>Implemented passive cell balancing logic based on cell voltage delta and operating conditions.</li>
+          <li>Used PWM-based balancing control to limit resistor heating during extended balancing windows.</li>
+          <li>Enabled balancing operation in both charge mode and low-power or sleep mode.</li>
+          <li>Worked on FS26 PMIC-based BMS power management for reduced-power system behavior.</li>
+          <li>Supported low-power cell voltage and temperature monitoring while the system remained in standby.</li>
+          <li>Contributed to validation and debug activities for production-oriented BMS behavior.</li>
+        </ul>
+
+        <h3>Technical Details</h3>
+        <p>
+          The balancing algorithm identified higher-voltage cells and selectively discharged them through
+          passive balancing paths. Instead of applying continuous bleed, PWM control was used to better
+          manage thermal loading and provide safer long-duration balancing behavior.
+        </p>
+        <p>
+          On the low-power side, the design allowed the BMS to continue monitoring important parameters
+          such as cell voltage and temperature without keeping the full controller stack fully active.
+          This reduced unnecessary power draw while preserving the ability to observe battery health in
+          standby conditions.
+        </p>
+
+        <h3>Engineering Challenges</h3>
+        <ul>
+          <li>Maintaining balancing effectiveness while controlling thermal rise in bleed resistors.</li>
+          <li>Reducing standby power without losing visibility of critical cell conditions.</li>
+          <li>Coordinating low-power transitions between the monitoring ICs, PMIC, and controller.</li>
+          <li>Designing behavior suitable for production firmware and automotive validation workflows.</li>
+        </ul>
+
+        <h3>Stack</h3>
+        <p>
+          Embedded C, NXP S32K322, ADBMS6832, ADBMS2950, FS26 PMIC, SPI, CAN, Vector CANoe, CAPL,
+          oscilloscope-based debugging, automotive BMS firmware development.
+        </p>
+
+        <h3>Impact</h3>
+        <ul>
+          <li>Reduced cell delta voltage by about 10 to 20 mV during charge-cycle balancing.</li>
+          <li>Achieved below 10 mV delta in sleep-mode balancing scenarios.</li>
+          <li>Improved low-power monitoring capability for standby operation in the BMS architecture.</li>
+          <li>Supported production-oriented EV BMS firmware development and validation activities.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        document.body.classList.toggle('menu-open');
+      });
+    }
+  </script>
+</body>
+
+</html>

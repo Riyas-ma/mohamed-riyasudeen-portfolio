@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Riyasudeen D | Embedded Software Developer</title>
+  <meta name="description" content="Premium recruiter-focused portfolio for Mohamed Riyasudeen D." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-card">
+      <img src="profile.jpeg" alt="Mohamed Riyasudeen" class="avatar">
+      <h1>Mohamed Riyasudeen D</h1>
+      <p>Embedded Software Developer</p>
+      <a class="linkedin-btn" href="https://www.linkedin.com/in/mohamed-riyasudeen-a8373b159/" target="_blank"
+        rel="noreferrer">LinkedIn</a>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="index.html#home" class="nav-link">Home</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#experience" class="nav-link">Experience</a>
+      <a href="index.html#skills" class="nav-link">Skills</a>
+      <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="section content-section">
+
+      <div class="section-head">
+        <span class="eyebrow"> Royal Enfield</span> <span class="eyebrow">2024</span>
+      </div>
+
+      <article class="card">
+
+        <h2 style="margin:0 0 14px;font:800 26px Outfit,sans-serif;color:#eef4ff;">Production BMS Driver Stack</h2>
+
+        <!-- OVERVIEW -->
+        <h3>Overview</h3>
+        <p>Production-level BMS firmware developed for the <strong>Royal Enfield Flying Flea C6</strong> electric
+          motorcycle's in-house Battery Management System. Built to <strong>MISRA C</strong> and <strong>ASIL-D</strong>
+          standards on the <strong>NXP S32K322</strong> microcontroller with <strong>FreeRTOS</strong>, managing a
+          <strong>28S1P</strong> pack (28 cells in series, each cell being 1S8P — 8 parallel cells). The firmware covers
+          complete cell monitoring, pack monitoring, passive balancing, low-power cell monitoring mode (LPCM),
+          diagnostics, functional safety, and fault management — all developed from scratch based only on ADI reference
+          code intended for evaluation purposes only.
+        </p>
+        <p>The in-house BMS has completed homologation and is targeted for production release by end of 2025, replacing
+          the currently outsourced BMS in the Flying Flea C6.</p>
+
+        <!-- SYSTEM ARCHITECTURE -->
+        <h3>System Architecture</h3>
+        <p>Daisy Chain Communication Order:</p>
+
+        <div style="
+        background:rgba(255,255,255,.03);
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:16px;
+        padding:20px 24px;
+        margin:14px 0 20px;
+        text-align:center;
+        font-family:Outfit,sans-serif;
+        line-height:2;
+        color:#c8d8f0;
+      ">
+          <div style="font-weight:700;color:#eef4ff;">NXP S32K322 <span style="color:#7df0d1;">(MCU)</span></div>
+          <div style="color:#49b2ff;">↕ SPI</div>
+          <div style="font-weight:700;color:#eef4ff;">ADBMS6822 <span style="color:#7df0d1;">(IsoSPI Bridge IC)</span>
+          </div>
+          <div style="color:#49b2ff;">↕ IsoSPI</div>
+          <div style="font-weight:700;color:#eef4ff;">ADBMS6832 #1 <span style="color:#7df0d1;">(AFE1 — Cells
+              1–14)</span></div>
+          <div style="color:#49b2ff;">↕ IsoSPI</div>
+          <div style="font-weight:700;color:#eef4ff;">ADBMS6832 #2 <span style="color:#7df0d1;">(AFE2 — Cells
+              15–28)</span></div>
+          <div style="color:#49b2ff;">↕ IsoSPI</div>
+          <div style="font-weight:700;color:#eef4ff;">ADBMS2950 <span style="color:#7df0d1;">(Pack Monitor IC)</span>
+          </div>
+        </div>
+
+        <p>The MCU communicates with ADBMS6822 over SPI. ADBMS6822 converts SPI to IsoSPI differential signals. The
+          three downstream ICs (AFE1, AFE2, ADBMS2950) are daisy-chained over IsoSPI.</p>
+
+        <!-- IC ROLES -->
+        <h3>IC Roles & What Was Developed</h3>
+
+        <h4 style="margin:16px 0 8px;font:700 15px Outfit,sans-serif;color:#7df0d1;">ADBMS6832 — Cell Monitoring AFE (×2
+          ICs)</h4>
+        <p>Each IC monitors 14 cells differentially (28 cells total across both ICs).</p>
+        <ul>
+          <li>Complete CDD (Complex Device Driver) — from low-level SPI/IsoSPI register access up to application layer</li>
+          <li>Cell voltage acquisition and conversion from raw ADC values to accurate millivolt readings</li>
+          <li>Temperature monitoring via 5 NTC thermistors per IC (10 NTCs total) using GPIO auxiliary ADC channels</li>
+          <li>Passive cell balancing using internal MOSFETs — <strong>PWM balancing method</strong> used to keep bleeding
+          resistor temperature within safe range (supports up to 300 mA per cell)</li>
+          <li>Open-wire detection for all cell inputs and GPIO channels using the IC's redundant ADC and the calculation
+          method specified in the ADI ADBMS6832 Safety Manual</li>
+          <li>Internal IC parameter monitoring — triggers <strong>Cell Monitor Failure Fault</strong> if any abnormality
+          detected</li>
+          <li><strong>Low Power Cell Monitoring Mode (LPCM)</strong> — complete CDD from scratch including:
+          <ul style="margin-top:6px;">
+            <li>Configurable heartbeat period — IC wakes periodically, monitors, and returns to sleep</li>
+            <li>OV/UV threshold configuration for cell voltages and GPIO channels</li>
+            <li>INTR pin assertion handling for fault wake-up signaling</li>
+            <li>Cell balancing support during LPCM with configurable 6-minute timeout as failsafe</li>
+            <li>Full LPCM enable/disable sequence with all hardware and software pre-conditions satisfied</li>
+          </ul>
+          </li>
+        </ul>
+        </p>
+        <h4 style="margin:16px 0 8px;font:700 15px Outfit,sans-serif;color:#7df0d1;">ADBMS2950 — Pack Monitor IC (×1 IC)
+        </h4>
+        <ul>
+          <li>Battery pack current measurement via dual shunt input channels (I1 & I2) using 18-bit ADC — raw to ampere
+          conversion</li>
+          <li>Battery pack voltage and load voltage measurement via VBAT1 and VBAT2 channels</li>
+          <li>Isolation resistance measurement — complex multi-step logic before calculation implemented</li>
+          <li>Shunt temperature monitoring, fuse voltage sense acquisition</li>
+          <li>GPIO and GPO control for switching measurement input MOSFETs during low-power mode to reduce consumption</li>
+          <li>Open-wire diagnostics for all ADC inputs (VBATx, Vx, Ix) — shunt sense short and open circuit detection
+          implemented</li>
+          <li>Over-current detection configuration — OCA/OCB threshold configured via software in config register</li>
+          <li>Internal IC parameter monitoring — triggers <strong>Pack Monitor Failure Fault</strong> if any abnormality
+          detected</li>
+          <li>Power supply management — load switch controlled by MCU to cut IC power during BMS low-power mode (IC has no
+          native low-power mode)</li>
+        </ul>
+
+        <!-- LOW POWER MODE -->
+        <h3>Low-Power Mode & LPCM</h3>
+        <p>This was the most complex and time-consuming part of the entire project.</p>
+
+        <h4 style="margin:12px 0 8px;font:700 14px Outfit,sans-serif;color:#7df0d1;">What Was Implemented</h4>
+        <ul>
+          <li>ADBMS6832 LPCM enabled with full pre-condition satisfaction (both hardware and software conditions)</li>
+          <li>PMIC set to LPOFF mode after confirmed LPCM entry — all LDOs off, MCU powered down</li>
+          <li>PMIC <strong>LDT (Long Duration Timer)</strong> configured for periodic MCU wake-up as primary wake
+          mechanism:
+          <ul style="margin-top:6px;">
+            <li><strong>Every 5 minutes</strong> — when cell balancing is active (delta voltage above threshold)</li>
+            <li><strong>Every 30 minutes</strong> — when balancing is inactive</li>
+          </ul>
+          </li>
+          <li>Cell balancing timeout set to <strong>6 minutes</strong> in ADBMS6832 as failsafe — if 5-minute wake-up does
+          not occur, balancing auto-stops at 6 minutes preventing over-discharge</li>
+        </ul>
+
+        <!-- PMIC WAKEUP PROBLEM -->
+        <h4 style="margin:16px 0 8px;font:700 14px Outfit,sans-serif;color:#7df0d1;">The PMIC Wake-Up Problem — Hardware
+          Debug</h4>
+        <p>A critical hardware issue was discovered and resolved during LPCM bring-up:</p>
+        <ul>
+          <li>The ADBMS6832 INTR pin was connected in parallel to both the <strong>PMIC WAKE1 pin</strong> and the
+          <strong>MCU GPIO (PTC12)</strong></li>
+          <li>When a fault triggered in LPCM, INTR asserted — but the MCU (even in power-off state) drew leakage current
+          through the GPIO pin</li>
+          <li>This pulled the INTR voltage down to approximately <strong>600 mV</strong> — below the PMIC wake-up threshold
+          </li>
+          <li>Result: PMIC could not wake up, MCU never turned on, faults went unhandled</li>
+          <li><strong>Root cause identified</strong> by disconnecting MCU GPIO from INTR line — INTR voltage recovered to
+          <strong>3.4V</strong>, PMIC woke up correctly</li>
+          <li><strong>Resolution:</strong> MCU GPIO connection to INTR removed. PMIC LDT periodic wake-up configured as the
+          primary wake mechanism instead of fault-triggered wake</li>
+          <li>Hardware verified using oscilloscope — LDO1, PMIC, INTR, and IsoSPI signal lines captured and analyzed</li>
+        </ul>
+
+        <!-- MCU & SOFTWARE STACK TABLE -->
+        <h3>MCU & Software Stack</h3>
+        <div style="overflow-x:auto;margin:14px 0;">
+          <table style="
+          width:100%;
+          border-collapse:collapse;
+          font-size:13.5px;
+          color:#c8d8f0;
+        ">
+            <thead>
+              <tr>
+                <th style="
+                background:rgba(73,178,255,.1);
+                border:1px solid rgba(255,255,255,.08);
+                padding:10px 14px;
+                text-align:left;
+                font:700 12px Outfit,sans-serif;
+                color:#7df0d1;
+                letter-spacing:.08em;
+                text-transform:uppercase;
+              ">Item</th>
+                <th style="
+                background:rgba(73,178,255,.1);
+                border:1px solid rgba(255,255,255,.08);
+                padding:10px 14px;
+                text-align:left;
+                font:700 12px Outfit,sans-serif;
+                color:#7df0d1;
+                letter-spacing:.08em;
+                text-transform:uppercase;
+              ">Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  MCU</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  NXP S32K322</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;">RTOS</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;">FreeRTOS</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  Coding Standard</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  MISRA C</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;">Safety Level</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;">ASIL-D</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  Peripherals Used</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  SPI, I2C, CAN, ADC, Timers, Interrupts, GPIOs</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;">IDE</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;">S32 Design Studio</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  Validation Tool</td>
+                <td style="border:1px solid rgba(255,255,255,.06);padding:10px 14px;background:rgba(255,255,255,.02);">
+                  Vector CANoe with custom BMS panel</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- FAULT MANAGEMENT -->
+        <h3>Fault Management</h3>
+        <ul>
+          <li>Cell voltage OV/UV faults</li>
+          <li>Temperature OT/UT faults</li>
+          <li>Open-wire faults (cell inputs and GPIO channels)</li>
+          <li>Cell Monitor Failure Fault (ADBMS6832 internal parameter monitoring)</li>
+          <li>Pack Monitor Failure Fault (ADBMS2950 internal parameter monitoring)</li>
+          <li>Over-current detection via OCA/OCB (ADBMS2950)</li>
+          <li>Isolation resistance fault</li>
+          <li>All faults reported over CAN</li>
+        </ul>
+
+        <!-- OUTCOMES -->
+        <h3>Outcomes</h3>
+        <ul>
+          <li>Production-level BMS firmware delivered to <strong>MISRA C and ASIL-D</strong> standards</li>
+          <li>Complete CDD stack developed from scratch — no production reference available from ADI</li>
+          <li>28-cell pack (1S8P configuration) fully monitored with cell voltage, temperature, current, pack voltage, and
+          isolation resistance</li>
+          <li>LPCM implemented with dual periodic wake-up strategy and 6-minute balancing failsafe</li>
+          <li>Homologation completed — firmware cleared for <strong>Royal Enfield Flying Flea C6</strong> in-house BMS
+          production release</li>
+          <li>Hardware-level PMIC wake-up issue identified, root-caused, and resolved through oscilloscope debugging and
+          schematic analysis</li>
+        </ul>
+
+        <!-- KEY TAKEAWAYS -->
+        <h3>Key Takeaways</h3>
+        <ul>
+          <li>Developed a safety-critical automotive firmware product end-to-end with no production reference</li>
+          <li>Gained deep knowledge of ADBMS6832 and ADBMS2950 at register level</li>
+          <li>Handled both hardware and software debugging simultaneously — probed SPI, IsoSPI differential lines with
+          logic analyzer and oscilloscope with differential probe</li>
+          <li>Decoded IsoSPI differential waveforms manually to identify daisy chain communication failures</li>
+          <li>Designed a robust low-power strategy combining LPCM, PMIC LDT, and balancing timeout failsafe</li>
+        </ul>
+
+        <!-- TECH STACK CHIPS -->
+        <h3>Tech Stack</h3>
+        <div class="chips" style="margin-top:10px;">
+          <span>NXP S32K322</span>
+          <span>FreeRTOS</span>
+          <span>ADBMS6832</span>
+          <span>ADBMS2950</span>
+          <span>ADBMS6822</span>
+          <span>IsoSPI</span>
+          <span>SPI</span>
+          <span>CAN</span>
+          <span>MISRA C</span>
+          <span>ASIL-D</span>
+          <span>FS26 PMIC</span>
+          <span>Embedded C</span>
+          <span>S32 Design Studio</span>
+          <span>Vector CANoe</span>
+        </div>
+
+        <!-- OSCILLOSCOPE CAPTURES -->
+        <h3 style="margin-top:28px;">Oscilloscope Captures & Validation Evidence</h3>
+        <p style="color:#99a8c4;font-size:13px;">Replace the placeholders below with your real screenshots exported from
+          the PPT slides.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/lpcm-entry-waveform.png" alt="LPCM Entry Sequence Waveform"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              LPCM Entry Sequence — LDO1, PMIC, INTR, IsoSPI
+            </p>
+          </div>
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/intr-voltage-issue.png" alt="INTR Voltage Level Waveform"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              INTR Voltage — 600mV (before fix) vs 3.4V (after fix)
+            </p>
+          </div>
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/bms-canoe-panel.png" alt="BMS CANoe Panel"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              BMS Monitoring Panel — Vector CANoe
+            </p>
+          </div>
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/vcu-canoe-panel.png" alt="VCU Panel"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              VCU Control Panel — Vector CANoe
+            </p>
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+  </main>
+
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        document.body.classList.toggle('menu-open');
+      });
+    }
+  </script>
+</body>
+
+</html>

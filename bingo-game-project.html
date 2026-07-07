@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Riyasudeen D | Embedded Software Developer</title>
+  <meta name="description" content="Premium recruiter-focused portfolio for Mohamed Riyasudeen D." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-card">
+      <img src="profile.jpeg" alt="Mohamed Riyasudeen" class="avatar">
+      <h1>Mohamed Riyasudeen D</h1>
+      <p>Embedded Software Developer</p>
+      <a class="linkedin-btn" href="https://www.linkedin.com/in/mohamed-riyasudeen-a8373b159/" target="_blank"
+        rel="noreferrer">LinkedIn</a>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="index.html#home" class="nav-link">Home</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#experience" class="nav-link">Experience</a>
+      <a href="index.html#skills" class="nav-link">Skills</a>
+      <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="section content-section">
+      <div class="section-head">
+        <a href ="https://www.vectorindia.org/" class="eyebrow">Vector India</a>
+        <span class="eyebrow">2022</span>
+      </div>
+
+      <article class="card">
+        <h2>BINGO Game — Terminal-Based C Programming Project</h2>
+
+        <p>
+          A fully functional, feature-rich terminal BINGO game built entirely in C, running on Ubuntu Linux.
+          It supports two game modes, background music, cheer sounds, a full-color terminal UI, and smooth
+          animations without any game engine or external framework.
+        </p>
+
+        <h3>Game Modes</h3>
+
+        <ul>
+          <li><strong>Player vs Player</strong> — Both players enter their chosen number directly in the terminal on
+            each turn, enabling head-to-head play on the same machine.</li>
+          <li><strong>Player vs Computer</strong> — The player enters a number each turn, while the computer selects
+            randomly from the remaining available numbers to create a competitive opponent.</li>
+        </ul>
+
+        <h3>Key Features</h3>
+
+        <ol>
+          <li><strong>Background Music via Threads</strong> — Music plays continuously in parallel with gameplay using
+            POSIX threads, so audio never blocks the main game flow.</li>
+          <li><strong>Cheer Sound on Line Completion</strong> — A short cheer clip plays whenever a player completes a
+            row, column, or diagonal and earns a BINGO letter.</li>
+          <li><strong>Colorful Terminal UI</strong> — ANSI escape codes are used to color the grid, highlight marked
+            numbers, and display earned BINGO letters in distinct colors.</li>
+          <li><strong>File Handling Animations</strong> — Intro screens, turn transitions, and win celebrations are
+            driven by sequentially reading stored animation frames from files.</li>
+          <li><strong>Complete Grid Logic</strong> — All five rows, five columns, and two diagonals are checked after
+            every move, with BINGO letters awarded in order from B to O.</li>
+          <li><strong>Computer AI</strong> — The computer picks from the pool of remaining unmarked numbers using
+            randomized logic to avoid predictable behavior.</li>
+        </ol>
+
+        <h3>Technical Implementation</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Implementation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Language</td>
+              <td>C (GCC on Ubuntu)</td>
+            </tr>
+            <tr>
+              <td>Environment</td>
+              <td>Ubuntu Linux Terminal</td>
+            </tr>
+            <tr>
+              <td>Threading</td>
+              <td>POSIX Threads (pthreads) for background music</td>
+            </tr>
+            <tr>
+              <td>Colors</td>
+              <td>ANSI escape codes for full-color terminal UI</td>
+            </tr>
+            <tr>
+              <td>Animations</td>
+              <td>File handling with sequential frame reads</td>
+            </tr>
+            <tr>
+              <td>Grid Logic</td>
+              <td>2D arrays with row, column, and diagonal checks</td>
+            </tr>
+            <tr>
+              <td>Computer Logic</td>
+              <td>Randomized selection from the remaining available number pool</td>
+            </tr>
+            <tr>
+              <td>Input</td>
+              <td>Terminal stdin with turn-based flow control</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Challenges &amp; Solutions</h3>
+
+        <ul>
+          <li><strong>Audio running in parallel without freezing</strong> — Solved by using pthreads so music runs
+            independently from gameplay.</li>
+          <li><strong>Animations in a plain terminal without graphics</strong> — Solved by reading and printing
+            animation frames from files with controlled delays.</li>
+          <li><strong>Making the terminal UI colorful and readable</strong> — Solved using ANSI escape codes for the
+            grid, numbers, and BINGO letters.</li>
+          <li><strong>Making the computer opponent feel natural</strong> — Solved with randomized selection from
+            remaining available numbers.</li>
+        </ul>
+
+        <h3>What I Learned</h3>
+
+        <ul>
+          <li>Practical use of POSIX threads for parallel execution in C.</li>
+          <li>Creative use of file handling in C for animation beyond basic read and write operations.</li>
+          <li>Using ANSI terminal escape codes to build a rich UI without a GUI framework.</li>
+          <li>How to structure a multi-module C project across game logic, input, audio, and display.</li>
+          <li>How to design a user experience around timing, feedback, and presentation rather than functionality alone.
+          </li>
+        </ul>
+
+        <h3>Development Environment</h3>
+
+        <ul>
+          <li><strong>OS:</strong> Ubuntu Linux</li>
+          <li><strong>Compiler:</strong> GCC</li>
+          <li><strong>Threads:</strong> POSIX pthreads (<code>-lpthread</code>)</li>
+          <li><strong>Audio:</strong> Linux audio system via terminal calls</li>
+          <li><strong>Editor:</strong> Terminal / VS Code</li>
+        </ul>
+
+        <h3>Gameplay Demo</h3>
+
+        <!-- Video 1: Player vs Player -->
+        <p style="margin:18px 0 8px;font-weight:700;color:#eef4ff;">Player vs Player</p>
+        <div
+          style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin-bottom:24px;">
+          <iframe src="https://drive.google.com/file/d/1fEFy05wmIBkxMtPQdTzkRv7V29dIpPvY/preview" title="BINGO - Player vs Player"
+            frameborder="0" allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;">
+          </iframe>
+        </div>
+
+        <!-- Video 2: Player vs Computer -->
+        <p style="margin:18px 0 8px;font-weight:700;color:#eef4ff;">Player vs Computer</p>
+        <div
+          style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin-bottom:24px;">
+          <iframe src="https://drive.google.com/file/d/1XU7DBZW44UxYTZrnCyy5E8E8jeiXeRH5/preview" title="BINGO - Player vs Computer"
+            frameborder="0" allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;">
+          </iframe>
+        </div>
+
+        <!-- Video 3: Tie Case -->
+        <p style="margin:18px 0 8px;font-weight:700;color:#eef4ff;">Tie Case</p>
+        <div
+          style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin-bottom:24px;">
+          <iframe src="https://drive.google.com/file/d/13AL8blPk82BcF2TCc_gDqM2fU8dumobS/preview" title="BINGO - Tie Case" frameborder="0"
+            allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;">
+          </iframe>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        document.body.classList.toggle('menu-open');
+      });
+    }
+  </script>
+</body>
+
+</html>
