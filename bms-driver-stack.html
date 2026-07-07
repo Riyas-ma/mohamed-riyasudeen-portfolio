@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K339WMQCW3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-K339WMQCW3');
+  </script>
+
   <title>Mohamed Riyasudeen D | Embedded Software Developer</title>
   <meta name="description" content="Premium recruiter-focused portfolio for Mohamed Riyasudeen D." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,23 +112,25 @@
           ICs)</h4>
         <p>Each IC monitors 14 cells differentially (28 cells total across both ICs).</p>
         <ul>
-          <li>Complete CDD (Complex Device Driver) — from low-level SPI/IsoSPI register access up to application layer</li>
+          <li>Complete CDD (Complex Device Driver) — from low-level SPI/IsoSPI register access up to application layer
+          </li>
           <li>Cell voltage acquisition and conversion from raw ADC values to accurate millivolt readings</li>
           <li>Temperature monitoring via 5 NTC thermistors per IC (10 NTCs total) using GPIO auxiliary ADC channels</li>
-          <li>Passive cell balancing using internal MOSFETs — <strong>PWM balancing method</strong> used to keep bleeding
-          resistor temperature within safe range (supports up to 300 mA per cell)</li>
+          <li>Passive cell balancing using internal MOSFETs — <strong>PWM balancing method</strong> used to keep
+            bleeding
+            resistor temperature within safe range (supports up to 300 mA per cell)</li>
           <li>Open-wire detection for all cell inputs and GPIO channels using the IC's redundant ADC and the calculation
-          method specified in the ADI ADBMS6832 Safety Manual</li>
+            method specified in the ADI ADBMS6832 Safety Manual</li>
           <li>Internal IC parameter monitoring — triggers <strong>Cell Monitor Failure Fault</strong> if any abnormality
-          detected</li>
+            detected</li>
           <li><strong>Low Power Cell Monitoring Mode (LPCM)</strong> — complete CDD from scratch including:
-          <ul style="margin-top:6px;">
-            <li>Configurable heartbeat period — IC wakes periodically, monitors, and returns to sleep</li>
-            <li>OV/UV threshold configuration for cell voltages and GPIO channels</li>
-            <li>INTR pin assertion handling for fault wake-up signaling</li>
-            <li>Cell balancing support during LPCM with configurable 6-minute timeout as failsafe</li>
-            <li>Full LPCM enable/disable sequence with all hardware and software pre-conditions satisfied</li>
-          </ul>
+            <ul style="margin-top:6px;">
+              <li>Configurable heartbeat period — IC wakes periodically, monitors, and returns to sleep</li>
+              <li>OV/UV threshold configuration for cell voltages and GPIO channels</li>
+              <li>INTR pin assertion handling for fault wake-up signaling</li>
+              <li>Cell balancing support during LPCM with configurable 6-minute timeout as failsafe</li>
+              <li>Full LPCM enable/disable sequence with all hardware and software pre-conditions satisfied</li>
+            </ul>
           </li>
         </ul>
         </p>
@@ -125,18 +138,20 @@
         </h4>
         <ul>
           <li>Battery pack current measurement via dual shunt input channels (I1 & I2) using 18-bit ADC — raw to ampere
-          conversion</li>
+            conversion</li>
           <li>Battery pack voltage and load voltage measurement via VBAT1 and VBAT2 channels</li>
           <li>Isolation resistance measurement — complex multi-step logic before calculation implemented</li>
           <li>Shunt temperature monitoring, fuse voltage sense acquisition</li>
-          <li>GPIO and GPO control for switching measurement input MOSFETs during low-power mode to reduce consumption</li>
+          <li>GPIO and GPO control for switching measurement input MOSFETs during low-power mode to reduce consumption
+          </li>
           <li>Open-wire diagnostics for all ADC inputs (VBATx, Vx, Ix) — shunt sense short and open circuit detection
-          implemented</li>
+            implemented</li>
           <li>Over-current detection configuration — OCA/OCB threshold configured via software in config register</li>
           <li>Internal IC parameter monitoring — triggers <strong>Pack Monitor Failure Fault</strong> if any abnormality
-          detected</li>
-          <li>Power supply management — load switch controlled by MCU to cut IC power during BMS low-power mode (IC has no
-          native low-power mode)</li>
+            detected</li>
+          <li>Power supply management — load switch controlled by MCU to cut IC power during BMS low-power mode (IC has
+            no
+            native low-power mode)</li>
         </ul>
 
         <!-- LOW POWER MODE -->
@@ -148,14 +163,15 @@
           <li>ADBMS6832 LPCM enabled with full pre-condition satisfaction (both hardware and software conditions)</li>
           <li>PMIC set to LPOFF mode after confirmed LPCM entry — all LDOs off, MCU powered down</li>
           <li>PMIC <strong>LDT (Long Duration Timer)</strong> configured for periodic MCU wake-up as primary wake
-          mechanism:
-          <ul style="margin-top:6px;">
-            <li><strong>Every 5 minutes</strong> — when cell balancing is active (delta voltage above threshold)</li>
-            <li><strong>Every 30 minutes</strong> — when balancing is inactive</li>
-          </ul>
+            mechanism:
+            <ul style="margin-top:6px;">
+              <li><strong>Every 5 minutes</strong> — when cell balancing is active (delta voltage above threshold)</li>
+              <li><strong>Every 30 minutes</strong> — when balancing is inactive</li>
+            </ul>
           </li>
-          <li>Cell balancing timeout set to <strong>6 minutes</strong> in ADBMS6832 as failsafe — if 5-minute wake-up does
-          not occur, balancing auto-stops at 6 minutes preventing over-discharge</li>
+          <li>Cell balancing timeout set to <strong>6 minutes</strong> in ADBMS6832 as failsafe — if 5-minute wake-up
+            does
+            not occur, balancing auto-stops at 6 minutes preventing over-discharge</li>
         </ul>
 
         <!-- PMIC WAKEUP PROBLEM -->
@@ -164,17 +180,23 @@
         <p>A critical hardware issue was discovered and resolved during LPCM bring-up:</p>
         <ul>
           <li>The ADBMS6832 INTR pin was connected in parallel to both the <strong>PMIC WAKE1 pin</strong> and the
-          <strong>MCU GPIO (PTC12)</strong></li>
+            <strong>MCU GPIO (PTC12)</strong>
+          </li>
           <li>When a fault triggered in LPCM, INTR asserted — but the MCU (even in power-off state) drew leakage current
-          through the GPIO pin</li>
-          <li>This pulled the INTR voltage down to approximately <strong>600 mV</strong> — below the PMIC wake-up threshold
+            through the GPIO pin</li>
+          <li>This pulled the INTR voltage down to approximately <strong>600 mV</strong> — below the PMIC wake-up
+            threshold
           </li>
           <li>Result: PMIC could not wake up, MCU never turned on, faults went unhandled</li>
-          <li><strong>Root cause identified</strong> by disconnecting MCU GPIO from INTR line — INTR voltage recovered to
-          <strong>3.4V</strong>, PMIC woke up correctly</li>
-          <li><strong>Resolution:</strong> MCU GPIO connection to INTR removed. PMIC LDT periodic wake-up configured as the
-          primary wake mechanism instead of fault-triggered wake</li>
-          <li>Hardware verified using oscilloscope — LDO1, PMIC, INTR, and IsoSPI signal lines captured and analyzed</li>
+          <li><strong>Root cause identified</strong> by disconnecting MCU GPIO from INTR line — INTR voltage recovered
+            to
+            <strong>3.4V</strong>, PMIC woke up correctly
+          </li>
+          <li><strong>Resolution:</strong> MCU GPIO connection to INTR removed. PMIC LDT periodic wake-up configured as
+            the
+            primary wake mechanism instead of fault-triggered wake</li>
+          <li>Hardware verified using oscilloscope — LDO1, PMIC, INTR, and IsoSPI signal lines captured and analyzed
+          </li>
         </ul>
 
         <!-- MCU & SOFTWARE STACK TABLE -->
@@ -269,13 +291,14 @@
         <ul>
           <li>Production-level BMS firmware delivered to <strong>MISRA C and ASIL-D</strong> standards</li>
           <li>Complete CDD stack developed from scratch — no production reference available from ADI</li>
-          <li>28-cell pack (1S8P configuration) fully monitored with cell voltage, temperature, current, pack voltage, and
-          isolation resistance</li>
+          <li>28-cell pack (1S8P configuration) fully monitored with cell voltage, temperature, current, pack voltage,
+            and
+            isolation resistance</li>
           <li>LPCM implemented with dual periodic wake-up strategy and 6-minute balancing failsafe</li>
           <li>Homologation completed — firmware cleared for <strong>Royal Enfield Flying Flea C6</strong> in-house BMS
-          production release</li>
+            production release</li>
           <li>Hardware-level PMIC wake-up issue identified, root-caused, and resolved through oscilloscope debugging and
-          schematic analysis</li>
+            schematic analysis</li>
         </ul>
 
         <!-- KEY TAKEAWAYS -->
@@ -284,7 +307,7 @@
           <li>Developed a safety-critical automotive firmware product end-to-end with no production reference</li>
           <li>Gained deep knowledge of ADBMS6832 and ADBMS2950 at register level</li>
           <li>Handled both hardware and software debugging simultaneously — probed SPI, IsoSPI differential lines with
-          logic analyzer and oscilloscope with differential probe</li>
+            logic analyzer and oscilloscope with differential probe</li>
           <li>Decoded IsoSPI differential waveforms manually to identify daisy chain communication failures</li>
           <li>Designed a robust low-power strategy combining LPCM, PMIC LDT, and balancing timeout failsafe</li>
         </ul>
