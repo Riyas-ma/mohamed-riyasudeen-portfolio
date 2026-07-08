@@ -69,7 +69,7 @@
           diagnostics, functional safety, and fault management — all developed from scratch based only on ADI reference
           code intended for evaluation purposes only.
         </p>
-        <p>The in-house BMS has completed homologation and is targeted for production release by end of 2025, replacing
+        <p>The in-house BMS has completed homologation and is targeted for production release by end of 2026, replacing
           the currently outsourced BMS in the Flying Flea C6.</p>
 
         <!-- SYSTEM ARCHITECTURE -->
@@ -92,11 +92,9 @@
           <div style="font-weight:700;color:#eef4ff;">ADBMS6822 <span style="color:#7df0d1;">(IsoSPI Bridge IC)</span>
           </div>
           <div style="color:#49b2ff;">↕ IsoSPI</div>
-          <div style="font-weight:700;color:#eef4ff;">ADBMS6832 #1 <span style="color:#7df0d1;">(AFE1 — Cells
-              1–14)</span></div>
+          <div style="font-weight:700;color:#eef4ff;">ADBMS6832 #1 <span style="color:#7df0d1;">(AFE1)</span></div>
           <div style="color:#49b2ff;">↕ IsoSPI</div>
-          <div style="font-weight:700;color:#eef4ff;">ADBMS6832 #2 <span style="color:#7df0d1;">(AFE2 — Cells
-              15–28)</span></div>
+          <div style="font-weight:700;color:#eef4ff;">ADBMS6832 #2 <span style="color:#7df0d1;">(AFE2)</span></div>
           <div style="color:#49b2ff;">↕ IsoSPI</div>
           <div style="font-weight:700;color:#eef4ff;">ADBMS2950 <span style="color:#7df0d1;">(Pack Monitor IC)</span>
           </div>
@@ -119,8 +117,7 @@
           <li>Passive cell balancing using internal MOSFETs — <strong>PWM balancing method</strong> used to keep
             bleeding
             resistor temperature within safe range (supports up to 300 mA per cell)</li>
-          <li>Open-wire detection for all cell inputs and GPIO channels using the IC's redundant ADC and the calculation
-            method specified in the ADI ADBMS6832 Safety Manual</li>
+          <li>Open-wire detection for all cell inputs and GPIO channels using the IC's redundant ADCs.</li>
           <li>Internal IC parameter monitoring — triggers <strong>Cell Monitor Failure Fault</strong> if any abnormality
             detected</li>
           <li><strong>Low Power Cell Monitoring Mode (LPCM)</strong> — complete CDD from scratch including:
@@ -128,7 +125,7 @@
               <li>Configurable heartbeat period — IC wakes periodically, monitors, and returns to sleep</li>
               <li>OV/UV threshold configuration for cell voltages and GPIO channels</li>
               <li>INTR pin assertion handling for fault wake-up signaling</li>
-              <li>Cell balancing support during LPCM with configurable 6-minute timeout as failsafe</li>
+              <li>Cell balancing support during LPCM with configurable timeout as failsafe</li>
               <li>Full LPCM enable/disable sequence with all hardware and software pre-conditions satisfied</li>
             </ul>
           </li>
@@ -140,13 +137,18 @@
           <li>Battery pack current measurement via dual shunt input channels (I1 & I2) using 18-bit ADC — raw to ampere
             conversion</li>
           <li>Battery pack voltage and load voltage measurement via VBAT1 and VBAT2 channels</li>
-          <li>Isolation resistance measurement — complex multi-step logic before calculation implemented</li>
-          <li>Shunt temperature monitoring, fuse voltage sense acquisition</li>
-          <li>GPIO and GPO control for switching measurement input MOSFETs during low-power mode to reduce consumption
+          <li>Isolation resistance measurement — complex multi-step logic for readng data before calculation implemented
+          </li>
+          <li>Shunt temperature monitoring for shunt temperature compensation to improve battery current sensing
+            accuracy</li>
+          <li>Fuse voltage sensing to detect fuse failures (charge fuse & discharge fuse)</li>
+          <li>GPIO and GPO control for switching measurement input MOSFETs during low-power mode to reduce power
+            consumption
           </li>
           <li>Open-wire diagnostics for all ADC inputs (VBATx, Vx, Ix) — shunt sense short and open circuit detection
             implemented</li>
-          <li>Over-current detection configuration — OCA/OCB threshold configured via software in config register</li>
+          <li>HV line Over-current / Short Circuit detection — OCA/OCB outputs assertion based on the configured
+            threshold to blow the pyro fuse or to open the contactors instantly</li>
           <li>Internal IC parameter monitoring — triggers <strong>Pack Monitor Failure Fault</strong> if any abnormality
             detected</li>
           <li>Power supply management — load switch controlled by MCU to cut IC power during BMS low-power mode (IC has
@@ -165,13 +167,15 @@
           <li>PMIC <strong>LDT (Long Duration Timer)</strong> configured for periodic MCU wake-up as primary wake
             mechanism:
             <ul style="margin-top:6px;">
-              <li><strong>Every 5 minutes</strong> — when cell balancing is active (delta voltage above threshold)</li>
-              <li><strong>Every 30 minutes</strong> — when balancing is inactive</li>
+              <li><strong>Every 5 minutes (Configurable) &nbsp;&nbsp;&nbsp;</strong> — &nbsp; when cell balancing is active (delta voltage above
+                threshold)</li>
+              <li><strong>Every 30 minutes (Configurable)&nbsp;</strong> — &nbsp; when balancing is inactive</li>
             </ul>
           </li>
-          <li>Cell balancing timeout set to <strong>6 minutes</strong> in ADBMS6832 as failsafe — if 5-minute wake-up
+          <li>Cell balancing timeout set to <strong>6 minutes (Configurable)</strong> in ADBMS6832 as failsafe — if
+            5-minute wake-up
             does
-            not occur, balancing auto-stops at 6 minutes preventing over-discharge</li>
+            not occur, balancing auto-stops at 6th minute preventing over-discharge of cells</li>
         </ul>
 
         <!-- PMIC WAKEUP PROBLEM -->
@@ -278,25 +282,25 @@
         <ul>
           <li>Cell voltage OV/UV faults</li>
           <li>Temperature OT/UT faults</li>
-          <li>Open-wire faults (cell inputs and GPIO channels)</li>
-          <li>Cell Monitor Failure Fault (ADBMS6832 internal parameter monitoring)</li>
-          <li>Pack Monitor Failure Fault (ADBMS2950 internal parameter monitoring)</li>
-          <li>Over-current detection via OCA/OCB (ADBMS2950)</li>
+          <li>Thermal runaway detection (dT/dt & dv/dt)</li>
+          <li>Open-wire fault detection (For all ADC inputs)</li>
+          <li>Cell Monitor Failure Fault (IC Monitoring)</li>
+          <li>Pack Monitor Failure Fault (IC Monitoring)</li>
+          <li>HV line short circuit detection via OCA/OCB (ADBMS2950)</li>
           <li>Isolation resistance fault</li>
-          <li>All faults reported over CAN</li>
+          <li>Fuse failure faults</li>
         </ul>
 
         <!-- OUTCOMES -->
         <h3>Outcomes</h3>
         <ul>
           <li>Production-level BMS firmware delivered to <strong>MISRA C and ASIL-D</strong> standards</li>
-          <li>Complete CDD stack developed from scratch — no production reference available from ADI</li>
+          <li>Complete CDD stack developed from scratch</li>
           <li>28-cell pack (1S8P configuration) fully monitored with cell voltage, temperature, current, pack voltage,
             and
             isolation resistance</li>
-          <li>LPCM implemented with dual periodic wake-up strategy and 6-minute balancing failsafe</li>
-          <li>Homologation completed — firmware cleared for <strong>Royal Enfield Flying Flea C6</strong> in-house BMS
-            production release</li>
+          <li>LPCM implemented with dual periodic wake-up strategy</li>
+          <li>Homologation completed — AIS156 & AIS004 (EMI/EMC) - Component level & Vehicle level</li>
           <li>Hardware-level PMIC wake-up issue identified, root-caused, and resolved through oscilloscope debugging and
             schematic analysis</li>
         </ul>
@@ -333,8 +337,8 @@
 
         <!-- OSCILLOSCOPE CAPTURES -->
         <h3 style="margin-top:28px;">Oscilloscope Captures & Validation Evidence</h3>
-        <p style="color:#99a8c4;font-size:13px;">Replace the placeholders below with your real screenshots exported from
-          the PPT slides.</p>
+        <!-- <p style="color:#99a8c4;font-size:13px;">Replace the placeholders below with your real screenshots exported from
+          the PPT slides.</p> -->
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
 

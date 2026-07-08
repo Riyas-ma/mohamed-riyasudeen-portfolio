@@ -115,11 +115,19 @@
           </li>
         </ul>
 
-        <h3>Stack</h3>
-        <p>
-          Vector CANoe, CANalyzer, CAPL scripting, CAPL DLL concepts, CAN communication, BMS signal
-          monitoring, fault injection, log analysis, embedded firmware validation.
-        </p>
+        <!-- TECH STACK CHIPS -->
+        <h3>Tech Stack</h3>
+        <div class="chips" style="margin-top:10px;">
+          <span>Vector CANoe</span>
+          <span>CANalyzer</span>
+          <span>CAPL scripting</span>
+          <span>CAPL DLL</span>
+          <span>CAN communication</span>
+          <span>BMS signal monitoring</span>
+          <span>fault injection</span>
+          <span>log analysis</span>
+          <span>embedded firmware validation</span>
+        </div>
 
         <h3>Impact</h3>
         <ul>
@@ -128,6 +136,47 @@
           <li>Reduced manual effort in repetitive validation flows using CAPL automation.</li>
           <li>Strengthened debug and verification coverage during BMS integration activities.</li>
         </ul>
+
+        <!-- OSCILLOSCOPE CAPTURES -->
+        <h3 style="margin-top:28px;">Screenshots</h3>
+        <!-- <p style="color:#99a8c4;font-size:13px;">Replace the placeholders below with your real screenshots exported from
+          the PPT slides.</p> -->
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/lpcm-entry-waveform.png" alt="LPCM Entry Sequence Waveform"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              LPCM Entry Sequence — LDO1, PMIC, INTR, IsoSPI
+            </p>
+          </div>
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/intr-voltage-issue.png" alt="INTR Voltage Level Waveform"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              INTR Voltage — 600mV (before fix) vs 3.4V (after fix)
+            </p>
+          </div>
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/bms-canoe-panel.png" alt="BMS CANoe Panel"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              BMS Monitoring Panel — Vector CANoe
+            </p>
+          </div>
+
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
+            <img src="assets/vcu-canoe-panel.png" alt="VCU Panel"
+              style="width:100%;display:block;border-radius:14px 14px 0 0;">
+            <p style="padding:10px 14px;margin:0;font-size:12px;color:#99a8c4;background:rgba(255,255,255,.02);">
+              VCU Control Panel — Vector CANoe
+            </p>
+          </div>
+
+        </div>
       </article>
     </section>
   </main>

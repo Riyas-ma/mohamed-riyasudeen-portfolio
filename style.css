@@ -515,6 +515,20 @@ a {
   text-justify: inter-word;
 }
 
+.card ul {
+  margin: 0 0 8px;
+  text-align: justify;
+  padding-left: 50px
+}
+
+.card li {
+  margin-bottom: 8px;
+  font-size: 15px;
+  text-align: justify;
+  text-justify: inter-word;
+  color: var(--muted);
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
